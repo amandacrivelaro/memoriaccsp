@@ -25,7 +25,7 @@ function bancoMysqli(){ // Cria conexao ao banco. Substitui o include "conecta_m
 }
 
 function autenticaUsuario($usuario, $senha){ //autentica usuario e cria inicia uma session
-	$sql = "SELECT * FROM mem_usuario, mem_papelusuario WHERE mem_usuario.nomeUsuario = '$usuario' AND mem_papelusuario.idPapelUsuario = mem_usuario.mem_papelusuario_idPapelUsuario LIMIT 0,1";
+	$sql = "SELECT * FROM mem_usuario, mem_papelusuario WHERE mem_usuario.nomeUsuario = '$usuario' AND mem_papelusuario.idPapelUsuario = mem_usuario.idPapelUsuario LIMIT 0,1";
 	$con = bancoMysqli();
 	$query = mysqli_query($con,$sql);
 	 //query que seleciona os campos que voltarão para na matriz
@@ -256,13 +256,14 @@ function geraFormato($tabela,$select,$instituicao){ //gera as opções do select
 	}
 }
 
-function recuperaArquivo($id){
-		$sql = "SELECT * FROM mem_contexto WHERE idContexto = $id";
+function recuperaCadastro($id){  //recupera o id cadastro para uma nova edição 
+		$sql = "SELECT * FROM mem_contexto WHERE idRegistro = $id";
 		$query = mysqli_query($sql);
-		$c = mysqli_fetch_array($query);
-		return $c;
+		$campo = mysqli_fetch_array($query);
+		return $campo;
 	
 }
+
 
 
 
